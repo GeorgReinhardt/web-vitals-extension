@@ -17,6 +17,12 @@
   let overlayClosedForSession = false;
   let latestCLS = {};
 
+
+// Edit 1 ____________________________________________________________________________________
+  const date = Date.now();
+  // Edit 1 ____________________________________________________________________________________
+
+
   // Core Web Vitals thresholds
   const LCP_THRESHOLD = 2500;
   const FID_THRESHOLD = 100;
@@ -42,6 +48,13 @@
       final: false,
       pass: true,
     },
+    //Edit 4
+      fcp: {
+      value: 0,
+      final: false,
+      pass: true,
+    },
+    //Edit 4
   };
 
   /**
@@ -163,6 +176,11 @@
     badgeMetrics[metricName].final = body.isFinal;
     badgeMetrics.location = getURL();
     badgeMetrics.timestamp = getTimestamp();
+     // Edit 2 ____________________________________________________________________________________
+    badgeMetrics.date = date;
+    console.log("bla");
+    // Edit 2 ____________________________________________________________________________________
+    
     const passes = scoreBadgeMetrics(badgeMetrics);
     // Broadcast metrics updates for badging
     chrome.runtime.sendMessage(
@@ -218,6 +236,11 @@
     webVitals.getFID((metric) => {
       broadcastMetricsUpdates('fid', metric);
     }, true);
+    //EDIT 3
+    webVitals.getFCP((metric) => {
+      broadcastMetricsUpdates('fcp', metric);
+    }, true);
+    //EDIT 3
   }
 
   /**

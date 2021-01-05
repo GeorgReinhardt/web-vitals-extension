@@ -276,7 +276,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // Store latest metrics locally only.
     // The popup will load the metric values from this storage.
     if (sender.tab.url) {
-      const key = hashCode(sender.tab.url);
+       // Edit 2 ____________________________________________________________________________________
+      //const key = hashCode(sender.tab.url);
+      const key = request.metrics.date;
+      //const key = "23";
+      console.log("log");
+      // Edit 2 ____________________________________________________________________________________
+     
       chrome.storage.local.set({[key]: request.metrics});
     }
     // send TabId to content script
